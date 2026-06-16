@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sinergia Studio — Franco Matías Luna · Coaching y Entrenamiento Deportivo</title>
+<meta name="description" content="Sinergia Studio. Acompaño a deportistas y equipos a aprender, decidir mejor y disfrutar el juego. Entrenamiento deportivo, coaching ontológico y desarrollo de objetivos. Córdoba, Argentina." />
+<meta name="author" content="Franco Matías Luna" />
+<meta name="theme-color" content="#0c0c0d" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Sinergia Studio — Coaching y Entrenamiento Deportivo" />
+<meta property="og:description" content="Acompaño a deportistas y equipos a aprender, decidir mejor y disfrutar el juego." />
+<meta property="og:url" content="https://zurdofio.github.io/mati/" />
+<meta property="og:image" content="https://zurdofio.github.io/mati/assets/sinergia-logo.png" />
+<meta property="og:image:alt" content="Sinergia Studio" />
+<meta property="og:locale" content="es_AR" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png" />
+<link rel="apple-touch-icon" href="assets/favicon-180.png" />
+<link rel="preload" as="image" href="assets/sinergia-mark-black.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================== TOKENS ============================== */
+:root{
+  --ink:#0c0c0d;
+  --ink-soft:#1a1a1c;
+  --paper:#f3efe7;
+  --paper-2:#eae4d8;
+  --paper-card:#f7f4ee;
+  --line:rgba(12,12,13,.14);
+  --line-strong:rgba(12,12,13,.28);
+  --muted:#6d6a62;
+  --muted-2:#908c83;
+  --on-dark:#ece7dd;
+  --on-dark-mute:#a3a097;
+  --line-dark:rgba(236,231,221,.16);
+
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Archivo", system-ui, sans-serif;
+
+  --maxw:1240px;
+  --gut:clamp(1.25rem, 4vw, 4rem);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+
+/* ============================== RESET ============================== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.6;
+  font-weight:400;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--ink);color:var(--paper)}
+
+/* Grain overlay */
+body::before{
+  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================== LAYOUT ============================== */
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+section{position:relative}
+
+.eyebrow{
+  font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:.7rem;
+}
+.eyebrow::before{content:"";width:1.8rem;height:1px;background:var(--line-strong)}
+.dark .eyebrow{color:var(--on-dark-mute)}
+.dark .eyebrow::before{background:var(--line-dark)}
+
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.04;letter-spacing:-.01em}
+.display{font-size:clamp(2.6rem,8vw,6.6rem)}
+.h2{font-size:clamp(2rem,5vw,3.7rem);line-height:1.05}
+.lead{font-size:clamp(1.1rem,1.8vw,1.4rem);line-height:1.55;color:var(--ink);font-weight:300}
+
+/* ============================== BUTTONS ============================== */
+.btn{
+  --c:var(--ink);--bg:var(--ink);--fg:var(--paper);
+  position:relative;display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--sans);font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  padding:1.05rem 1.7rem;border:1px solid var(--c);border-radius:999px;
+  background:var(--bg);color:var(--fg);overflow:hidden;
+  transition:color .45s var(--ease),border-color .45s var(--ease),transform .45s var(--ease);
+  isolation:isolate;
+}
+.btn .arrow{transition:transform .45s var(--ease)}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--paper);transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
+.btn:hover{color:var(--ink)}
+.btn:hover::after{transform:scaleX(1);transform-origin:left}
+.btn:hover .arrow{transform:translateX(.3rem)}
+.btn.ghost{--bg:transparent;--fg:var(--ink);--c:var(--line-strong)}
+.btn.ghost::after{background:var(--ink)}
+.btn.ghost:hover{color:var(--paper);border-color:var(--ink)}
+.dark .btn.ghost{--fg:var(--on-dark);--c:var(--line-dark)}
+.dark .btn.ghost::after{background:var(--paper)}
+.dark .btn.ghost:hover{color:var(--ink)}
+
+/* link with animated underline */
+.ul{position:relative;display:inline-block}
+.ul::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.ul:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* focus-visible (keyboard only) */
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:3px}
+.hero :focus-visible,.sec.dark :focus-visible,.contact :focus-visible{outline-color:var(--on-dark)}
+.nav-links a:focus-visible::after,.ul:focus-visible::after{transform:scaleX(1);transform-origin:left}
+
+/* ============================== NAV ============================== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem var(--gut);
+  transition:transform .5s var(--ease),background .4s var(--ease),box-shadow .4s var(--ease),padding .4s var(--ease);
+}
+.nav.scrolled{background:rgba(243,239,231,.82);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line);padding-top:.8rem;padding-bottom:.8rem}
+.nav.hide{transform:translateY(-110%)}
+.brand{display:flex;align-items:center;gap:.7rem;z-index:1002}
+.brand img{width:30px;height:30px;object-fit:contain}
+.brand .bt{font-family:var(--serif);font-size:1.02rem;letter-spacing:.02em}
+.brand .bt b{font-weight:500}
+.brand .bt span{color:var(--muted);font-style:italic}
+.nav.on-hero:not(.scrolled){color:var(--on-dark)}
+.nav.on-hero:not(.scrolled) .brand .bt span{color:var(--on-dark-mute)}
+
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.04em;position:relative;opacity:.85;transition:opacity .3s}
+.nav-links a:hover{opacity:1}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-cta{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:1px solid currentColor;padding:.6rem 1.1rem;border-radius:999px;opacity:.9;transition:.35s var(--ease)}
+.nav-cta:hover{background:currentColor;opacity:1}
+.nav-cta:hover span{color:var(--paper)}
+.nav.on-hero:not(.scrolled) .nav-cta:hover span{color:var(--ink)}
+
+.burger{display:none;width:44px;height:44px;position:relative;z-index:1002;margin:-12px -8px -12px 0}
+.burger span{position:absolute;left:50%;width:28px;height:1.5px;background:currentColor;transform:translateX(-50%);transition:.4s var(--ease)}
+.burger span:nth-child(1){top:calc(50% - 8px)}
+.burger span:nth-child(2){top:50%}
+.burger span:nth-child(3){top:calc(50% + 8px)}
+body.menu-open .burger span:nth-child(1){top:50%;transform:translateX(-50%) rotate(45deg)}
+body.menu-open .burger span:nth-child(2){opacity:0}
+body.menu-open .burger span:nth-child(3){top:50%;transform:translateX(-50%) rotate(-45deg)}
+
+/* ============================== HERO ============================== */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  background:var(--ink);color:var(--on-dark);position:relative;overflow:hidden;
+  padding:7rem 0 3rem;
+}
+.hero-bg-circles{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}
+.hero-bg-circles svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(140vh,1400px);height:auto}
+.hero-bg-circles circle{fill:none;stroke:var(--line-dark);stroke-width:1}
+.hero .wrap{position:relative;z-index:2}
+.hero-mark{width:clamp(64px,9vw,104px);margin-bottom:2.2rem;filter:drop-shadow(0 4px 30px rgba(0,0,0,.4))}
+.hero h1{margin:.2rem 0 1.6rem;max-width:14ch}
+.hero h1 .it{font-style:italic;color:var(--on-dark-mute)}
+.hero-sub{max-width:46ch;color:var(--on-dark-mute);font-weight:300;font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.6}
+.hero-cta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.6rem}
+.hero .btn{--c:var(--on-dark);--bg:var(--on-dark);--fg:var(--ink)}
+.hero .btn::after{background:transparent}
+.hero .btn:hover{color:var(--ink)}
+.hero .btn.ghost{--bg:transparent;--fg:var(--on-dark);--c:var(--line-dark)}
+.hero .btn.ghost::after{background:var(--paper)}
+.hero .btn.ghost:hover{color:var(--ink);border-color:var(--paper)}
+
+.hero-meta{
+  position:absolute;left:var(--gut);right:var(--gut);bottom:1.8rem;z-index:2;
+  display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;
+  font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark-mute);
+}
+.hero-meta .scroll-hint{display:inline-flex;align-items:center;gap:.6rem}
+.hero-meta .scroll-hint .line{width:2.4rem;height:1px;background:var(--line-dark);position:relative;overflow:hidden}
+.hero-meta .scroll-hint .line::after{content:"";position:absolute;inset:0;background:var(--on-dark);transform:translateX(-100%);animation:scrollline 2.4s var(--ease) infinite}
+@keyframes scrollline{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+
+/* ============================== SECTION SHELL ============================== */
+.sec{padding:clamp(5rem,11vw,9.5rem) 0}
+.sec.dark{background:var(--ink);color:var(--on-dark)}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:baseline}
+.sec-num{font-family:var(--serif);font-size:.95rem;color:var(--muted)}
+.dark .sec-num{color:var(--on-dark-mute)}
+
+/* ============================== FILOSOFÍA ============================== */
+.philo{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,5rem)}
+.philo-head{max-width:60rem}
+.philo-head h2{margin-top:1.6rem}
+.philo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.8rem,4vw,4rem);align-items:start}
+.philo-grid p{color:var(--ink);font-size:1.05rem;line-height:1.75;font-weight:300}
+.philo-grid p + p{margin-top:1.1rem}
+.philo-aside{border-left:1px solid var(--line);padding-left:2rem}
+.philo-aside .who{font-family:var(--serif);font-size:1.5rem;line-height:1.25;font-weight:400}
+.philo-aside .role{margin-top:.6rem;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.philo-aside .sig{margin-top:2.2rem;width:200px;opacity:.92}
+.philo-aside .loc{margin-top:1.4rem;font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:.5rem}
+
+.pull{
+  font-family:var(--serif);font-size:clamp(1.6rem,3.4vw,2.7rem);line-height:1.25;
+  font-weight:400;max-width:24ch;
+}
+.pull .it{font-style:italic}
+
+/* ============================== ENFOQUE / PILARES ============================== */
+.pillars-intro{max-width:46rem;margin-top:1.6rem}
+.pillars-intro h2{margin-bottom:1.2rem}
+.venn{display:flex;justify-content:center;margin:clamp(2.5rem,6vw,4.5rem) 0 1rem}
+.venn svg{width:min(440px,82vw);height:auto;overflow:visible}
+.venn .vc{fill:none;stroke:var(--line-dark);stroke-width:1.2}
+.venn .vc.f{fill:rgba(236,231,221,.04)}
+.venn text{fill:var(--on-dark);font-family:var(--sans);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.venn .center{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0;text-transform:none}
+
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,3rem);margin-top:clamp(2rem,5vw,3.5rem)}
+.pillar{border-top:1px solid var(--line-dark);padding-top:1.6rem}
+.pillar .pn{font-family:var(--serif);font-size:1rem;color:var(--on-dark-mute)}
+.pillar h3{font-size:1.6rem;margin:1.4rem 0 .9rem}
+.pillar p{color:var(--on-dark-mute);font-weight:300;font-size:1rem;line-height:1.65}
+
+/* ============================== SERVICIOS ============================== */
+.serv-head{max-width:50rem;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.serv-head h2{margin-top:1.4rem}
+.serv-list{border-top:1px solid var(--line)}
+.serv{
+  display:grid;grid-template-columns:auto 1fr auto;gap:clamp(1rem,4vw,3rem);align-items:center;
+  padding:clamp(1.6rem,3vw,2.4rem) 0;border-bottom:1px solid var(--line);
+  transition:padding-left .5s var(--ease);position:relative;
+}
+.serv::before{content:"";position:absolute;left:50%;transform:translateX(-50%);width:100vw;top:0;bottom:0;background:var(--ink);z-index:-1;opacity:0;transition:opacity .5s var(--ease)}
+.serv:hover{padding-left:1.5rem}
+.serv .sidx{font-family:var(--serif);font-size:.95rem;color:var(--muted);transition:color .5s var(--ease)}
+.serv .sbody h3{font-size:clamp(1.4rem,2.6vw,2.1rem);transition:color .5s var(--ease)}
+.serv .sbody p{color:var(--muted);font-size:.98rem;font-weight:300;margin-top:.4rem;max-width:54ch;transition:color .5s var(--ease)}
+.serv .stag{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:color .5s var(--ease)}
+@media(hover:hover){
+  .serv:hover::before{opacity:1}
+  .serv:hover .sbody h3,.serv:hover .sidx{color:var(--on-dark)}
+  .serv:hover .sbody p,.serv:hover .stag{color:var(--on-dark-mute)}
+}
+
+/* ============================== TRAYECTORIA ============================== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);margin-top:clamp(2.5rem,5vw,3.5rem)}
+.stat{background:var(--ink);padding:clamp(1.6rem,3vw,2.4rem)}
+.stat .num{font-family:var(--serif);font-size:clamp(2.1rem,4.4vw,3.2rem);line-height:1;white-space:nowrap}
+.stat .lab{margin-top:.7rem;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark-mute)}
+
+.timeline{margin-top:clamp(3rem,6vw,5rem);border-top:1px solid var(--line-dark)}
+.tl{display:grid;grid-template-columns:9rem 1fr;gap:clamp(1rem,4vw,3rem);padding:clamp(1.6rem,3vw,2.2rem) 0;border-bottom:1px solid var(--line-dark);align-items:baseline}
+.tl .yr{font-family:var(--serif);font-size:1.15rem;color:var(--on-dark)}
+.tl .yr small{display:block;font-family:var(--sans);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark-mute);margin-top:.3rem}
+.tl .ev h3{font-size:clamp(1.2rem,2.2vw,1.55rem);font-weight:400}
+.tl .ev p{color:var(--on-dark-mute);font-weight:300;margin-top:.4rem;font-size:.98rem;line-height:1.6}
+.tl.now .yr{position:relative}
+.tl.now .yr::before{content:"";position:absolute;left:-1.1rem;top:.55rem;width:7px;height:7px;border-radius:50%;background:var(--on-dark);box-shadow:0 0 0 0 rgba(236,231,221,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(236,231,221,.5)}70%{box-shadow:0 0 0 9px rgba(236,231,221,0)}100%{box-shadow:0 0 0 0 rgba(236,231,221,0)}}
+
+/* ============================== FORMACIÓN ============================== */
+.form-head{max-width:46rem;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
+.form-head h2{margin-top:1.4rem}
+.creds{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.cred{background:var(--paper-card);padding:clamp(1.6rem,3vw,2.2rem)}
+.cred .ct{font-family:var(--serif);font-size:1.25rem;line-height:1.3;font-weight:400;margin:0}
+.cred .cm{margin-top:.6rem;font-size:.84rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cred.feat{background:var(--ink);color:var(--on-dark)}
+.cred.feat .cm{color:var(--on-dark-mute)}
+.cred .badge{display:inline-block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:.22rem .6rem;margin-bottom:1rem;opacity:.7}
+
+/* ============================== CONTACTO ============================== */
+.contact{background:var(--ink);color:var(--on-dark);padding:clamp(5rem,11vw,9rem) 0 0}
+.contact h2{font-size:clamp(2.6rem,7vw,5.6rem);margin:1.4rem 0;max-width:16ch}
+.contact h2 .it{font-style:italic;color:var(--on-dark-mute)}
+.contact-lead{max-width:42ch;color:var(--on-dark-mute);font-weight:300;font-size:clamp(1.05rem,1.6vw,1.25rem)}
+.channels{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-dark);border-top:1px solid var(--line-dark);margin-top:clamp(3rem,6vw,5rem)}
+.ch{
+  background:var(--ink);padding:clamp(1.8rem,3.5vw,2.8rem);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  transition:background .4s var(--ease);position:relative;overflow:hidden;
+}
+.ch>div{min-width:0}
+.ch .cl{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark-mute);transition:color .4s}
+.ch .cv{font-family:var(--serif);font-size:clamp(1.3rem,2.4vw,1.9rem);margin-top:.5rem;transition:color .4s;overflow-wrap:anywhere}
+.ch .arrow{font-size:1.4rem;transition:transform .4s var(--ease),color .4s}
+.ch[href]:hover{background:var(--on-dark)}
+.ch[href]:hover .cl,.ch[href]:hover .cv,.ch[href]:hover .arrow{color:var(--ink)}
+.ch[href]:hover .arrow{transform:translate(.3rem,-.3rem)}
+.ch.soon{cursor:default}
+.ch.soon .cv{color:var(--on-dark-mute)}
+.ch.soon .pill{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line-dark);border-radius:999px;padding:.2rem .55rem;color:var(--on-dark-mute)}
+
+/* ============================== FOOTER ============================== */
+.footer{background:var(--ink);color:var(--on-dark);padding:clamp(3.5rem,7vw,6rem) 0 2.5rem;border-top:1px solid var(--line-dark);margin-top:clamp(3rem,6vw,5rem)}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem}
+.footer-brand{display:flex;align-items:center;gap:1rem}
+.footer-brand img{width:54px}
+.footer-brand .ft{font-family:var(--serif);font-size:1.4rem}
+.footer-brand .ft span{display:block;font-family:var(--sans);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--on-dark-mute);margin-top:.3rem}
+.footer-soc{display:flex;gap:1.4rem;font-size:.82rem}
+.footer-soc a{color:var(--on-dark-mute);transition:color .3s}
+.footer-soc a:hover{color:var(--on-dark)}
+.footer-bottom{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.6rem;border-top:1px solid var(--line-dark);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem;font-size:.76rem;color:var(--on-dark-mute);letter-spacing:.04em}
+
+/* ============================== REVEAL ANIM ============================== */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+.reveal[data-d="4"]{transition-delay:.32s}
+
+/* hero load */
+.hl{opacity:0;transform:translateY(22px);animation:heroIn 1s var(--ease) forwards}
+.hl.d1{animation-delay:.15s}.hl.d2{animation-delay:.3s}.hl.d3{animation-delay:.45s}.hl.d4{animation-delay:.6s}.hl.d5{animation-delay:.75s}
+@keyframes heroIn{to{opacity:1;transform:none}}
+
+/* ============================== RESPONSIVE ============================== */
+@media(max-width:880px){
+  .nav-links{
+    position:fixed;inset:0;background:var(--ink);color:var(--on-dark);
+    flex-direction:column;justify-content:center;align-items:flex-start;
+    gap:1.6rem;padding:var(--gut);font-size:1.6rem;
+    transform:translateX(100%);visibility:hidden;
+    transition:transform .55s var(--ease),visibility 0s linear .55s;z-index:1001;
+  }
+  body.menu-open .nav-links{transform:none;visibility:visible;transition:transform .55s var(--ease),visibility 0s}
+  .nav-links a{font-family:var(--serif);font-size:2rem;opacity:1}
+  .nav-links a::after{display:none}
+  .nav-links .nav-cta{font-family:var(--sans);font-size:.9rem;border-color:var(--line-dark);margin-top:1rem}
+  .nav-links .nav-cta:hover{background:var(--on-dark)}
+  .nav-links .nav-cta:hover span{color:var(--ink)}
+  .burger{display:block}
+  .nav.on-hero:not(.scrolled){color:var(--on-dark)}
+  body.menu-open .nav{color:var(--on-dark)}
+  .philo-grid{grid-template-columns:1fr;gap:2rem}
+  .philo-aside{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:2rem}
+  .pillars{grid-template-columns:1fr;gap:0}
+  .pillar{border-top:1px solid var(--line-dark);padding:1.6rem 0}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .creds{grid-template-columns:1fr}
+  .channels{grid-template-columns:1fr}
+  .serv{grid-template-columns:auto 1fr;gap:1rem 1.4rem}
+  .serv .stag{grid-column:2;justify-self:start}
+  .tl{grid-template-columns:1fr;gap:.4rem}
+}
+@media(max-width:520px){
+  .stats{grid-template-columns:1fr}
+  .hero-meta{font-size:.66rem}
+  .footer-top{flex-direction:column}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+  .hl{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================== NAV ============================== -->
+<nav class="nav on-hero" id="nav" aria-label="Principal">
+  <a href="#inicio" class="brand" aria-label="Sinergia Studio — inicio">
+    <img src="assets/sinergia-mark-white.png" alt="" id="brandmark" />
+    <span class="bt"><b>Sinergia</b> <span>Studio</span></span>
+  </a>
+  <div class="nav-links" id="navlinks">
+    <a href="#filosofia">Filosofía</a>
+    <a href="#enfoque">Enfoque</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#trayectoria">Trayectoria</a>
+    <a href="#formacion">Formación</a>
+    <a href="#contacto" class="nav-cta"><span>Contacto</span></a>
+  </div>
+  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navlinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============================== HERO ============================== -->
+<header class="hero dark" id="inicio">
+  <div class="hero-bg-circles" aria-hidden="true">
+    <svg viewBox="0 0 600 400">
+      <circle cx="220" cy="200" r="150"/><circle cx="300" cy="200" r="150"/><circle cx="380" cy="200" r="150"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <img class="hero-mark hl" src="assets/sinergia-mark-white.png" alt="Sinergia Studio" />
+    <p class="eyebrow hl d1">Coaching · Entrenamiento · Desarrollo deportivo</p>
+    <h1 class="display hl d2">Donde el equipo y la persona <span class="it">crecen juntos.</span></h1>
+    <p class="hero-sub hl d3">Acompaño a deportistas y equipos a aprender de verdad, decidir mejor en la cancha y disfrutar el juego. Eso es sinergia.</p>
+    <div class="hero-cta hl d4">
+      <a href="#contacto" class="btn">Trabajemos juntos <span class="arrow">→</span></a>
+      <a href="#filosofia" class="btn ghost">Conocer la propuesta</a>
+    </div>
+  </div>
+  <div class="hero-meta hl d5">
+    <span>Córdoba · Argentina</span>
+    <span class="scroll-hint"><span class="line"></span> Deslizá</span>
+    <span>Est. 2026</span>
+  </div>
+</header>
+
+<!-- ============================== FILOSOFÍA ============================== -->
+<section class="sec" id="filosofia">
+  <div class="wrap philo">
+    <div class="philo-head">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <p class="eyebrow reveal">Te doy la bienvenida</p>
+      </div>
+      <h2 class="h2 reveal" data-d="1" style="margin-top:1.6rem;">Hoy nace Sinergia Studio,<br>y quiero compartirlo.</h2>
+    </div>
+
+    <div class="philo-grid">
+      <div class="reveal" data-d="1">
+        <p>Mi trabajo está orientado al desarrollo de equipos deportivos y también al crecimiento individual de cada jugador y participante dentro de ellos.</p>
+        <p>Me enfoco en generar mejores procesos de aprendizaje, entendiendo que aprender no es solo incorporar conocimientos, sino saber aplicarlos dentro del juego. Busco acompañar a los deportistas para que tomen mejores decisiones en situaciones reales, fortaleciendo su confianza y su capacidad de adaptación.</p>
+        <p>También considero fundamental el rol de las emociones dentro del deporte, ya que forman parte de cada experiencia, tanto a nivel grupal como individual. Mi objetivo es identificar aquellas situaciones que dificultan el avance —ya sea por dinámicas del equipo o por cuestiones personales— y trabajar sobre ellas de manera progresiva.</p>
+        <p>A través de este proceso busco mejorar el rendimiento, pero sin perder de vista algo esencial: el disfrute del juego, tanto en el ámbito profesional como amateur.</p>
+      </div>
+      <aside class="philo-aside reveal" data-d="2">
+        <p class="who">Soy Franco Matías Luna,<br>profesor de Educación Física.</p>
+        <p class="role">Entrenador · Coach deportivo</p>
+        <img class="sig" src="assets/signature-black.png" alt="Firma de Franco Matías Luna" />
+        <p class="loc">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Bialet Massé, Córdoba — Argentina
+        </p>
+      </aside>
+    </div>
+
+    <p class="pull reveal" data-d="1" style="margin-top:clamp(3rem,6vw,5rem);">
+      <span class="it">“Aprender</span> no es solo incorporar conocimientos, sino saber aplicarlos dentro del juego.”
+    </p>
+  </div>
+</section>
+
+<!-- ============================== ENFOQUE / PILARES ============================== -->
+<section class="sec dark" id="enfoque">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <p class="eyebrow reveal">El enfoque</p>
+    </div>
+    <div class="pillars-intro">
+      <h2 class="h2 reveal" data-d="1">Tres dimensiones que, al integrarse, generan sinergia.</h2>
+      <p class="lead reveal" data-d="2" style="color:var(--on-dark-mute)">El nombre no es casualidad: el verdadero progreso aparece cuando el cuerpo, la mente y el vínculo trabajan en la misma dirección.</p>
+    </div>
+
+    <div class="venn reveal" data-d="1" aria-hidden="true">
+      <svg viewBox="0 0 320 290">
+        <circle class="vc f" cx="110" cy="115" r="92"/>
+        <circle class="vc f" cx="210" cy="115" r="92"/>
+        <circle class="vc f" cx="160" cy="175" r="92"/>
+        <text x="76" y="80" font-size="10" text-anchor="middle">Aprendizaje</text>
+        <text x="244" y="80" font-size="10" text-anchor="middle">Emoción</text>
+        <text x="160" y="238" font-size="10" text-anchor="middle">Rendimiento</text>
+        <text class="center" x="160" y="142" font-size="20" text-anchor="middle">Sinergia</text>
+      </svg>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar reveal" data-d="1">
+        <span class="pn">01</span>
+        <h3>Aprendizaje aplicado</h3>
+        <p>Procesos de aprendizaje que se trasladan a la cancha: leer el juego, decidir mejor y adaptarse a situaciones reales con confianza.</p>
+      </div>
+      <div class="pillar reveal" data-d="2">
+        <span class="pn">02</span>
+        <h3>Emoción y vínculo</h3>
+        <p>Las emociones son parte de cada experiencia deportiva. Trabajo las dinámicas del equipo y lo personal para destrabar lo que frena el avance.</p>
+      </div>
+      <div class="pillar reveal" data-d="3">
+        <span class="pn">03</span>
+        <h3>Rendimiento con disfrute</h3>
+        <p>Busco mejorar el rendimiento sin perder lo esencial: el disfrute del juego, en el deporte profesional y amateur por igual.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SERVICIOS ============================== -->
+<section class="sec" id="servicios">
+  <div class="wrap">
+    <div class="serv-head">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <p class="eyebrow reveal">Cómo acompaño</p>
+      </div>
+      <h2 class="h2 reveal" data-d="1">Propuestas para equipos, deportistas e instituciones.</h2>
+    </div>
+
+    <div class="serv-list">
+      <a class="serv reveal" data-d="1" href="#contacto">
+        <span class="sidx">01</span>
+        <div class="sbody">
+          <h3>Entrenamiento deportivo</h3>
+          <p>Planificación y conducción de entrenamientos para equipos e individuales, con base en básquetbol y en la iniciación multideporte.</p>
+        </div>
+        <span class="stag">Equipos · Individual</span>
+      </a>
+      <a class="serv reveal" data-d="1" href="#contacto">
+        <span class="sidx">02</span>
+        <div class="sbody">
+          <h3>Coaching deportivo</h3>
+          <p>Acompañamiento desde el coaching ontológico aplicado al deporte para fortalecer confianza, toma de decisiones y gestión emocional.</p>
+        </div>
+        <span class="stag">Ontológico</span>
+      </a>
+      <a class="serv reveal" data-d="2" href="#contacto">
+        <span class="sidx">03</span>
+        <div class="sbody">
+          <h3>Desarrollo de objetivos</h3>
+          <p>Definición y seguimiento de objetivos deportivos individuales y grupales, con procesos progresivos y medibles en el tiempo.</p>
+        </div>
+        <span class="stag">Planificación</span>
+      </a>
+      <a class="serv reveal" data-d="2" href="#contacto">
+        <span class="sidx">04</span>
+        <div class="sbody">
+          <h3>Dinámicas de equipo</h3>
+          <p>Intervención sobre las dinámicas grupales que dificultan el avance, fortaleciendo el vínculo, la comunicación y la cohesión.</p>
+        </div>
+        <span class="stag">Grupal</span>
+      </a>
+      <a class="serv reveal" data-d="3" href="#contacto">
+        <span class="sidx">05</span>
+        <div class="sbody">
+          <h3>Iniciación deportiva</h3>
+          <p>Formación de niños, niñas y jóvenes desde la estructura y la dinámica del deporte, priorizando el aprendizaje y el disfrute.</p>
+        </div>
+        <span class="stag">Formación</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TRAYECTORIA ============================== -->
+<section class="sec dark" id="trayectoria">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <p class="eyebrow reveal">Trayectoria</p>
+    </div>
+    <h2 class="h2 reveal" data-d="1" style="margin-top:1.4rem;max-width:18ch;">Más de dos décadas formando jugadores y equipos.</h2>
+
+    <div class="stats reveal" data-d="1">
+      <div class="stat"><div class="num">25+</div><div class="lab">Años en el deporte</div></div>
+      <div class="stat"><div class="num">U15–U21</div><div class="lab">y Primera M/F dirigidas</div></div>
+      <div class="stat"><div class="num">Nivel 2</div><div class="lab">Entrenador Nacional (CAB)</div></div>
+      <div class="stat"><div class="num">Punilla</div><div class="lab">Selección U17 a cargo</div></div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl now reveal" data-d="1">
+        <div class="yr">2022 — Hoy <small>Club Bialet Massé</small></div>
+        <div class="ev">
+          <h3>Entrenador de divisiones formativas y mayores</h3>
+          <p>A cargo de las categorías U15, U17 y U21, además de Primera Masculina y Primera Femenina.</p>
+        </div>
+      </div>
+      <div class="tl reveal" data-d="1">
+        <div class="yr">2025 <small>Selección de Punilla</small></div>
+        <div class="ev">
+          <h3>Entrenador principal · Selección Masculina U17</h3>
+          <p>Conducción del seleccionado de la región de Punilla en categoría U17.</p>
+        </div>
+      </div>
+      <div class="tl reveal" data-d="2">
+        <div class="yr">2024 <small>Selección de Punilla</small></div>
+        <div class="ev">
+          <h3>Asistente · Selección Masculina U17</h3>
+          <p>Cuerpo técnico del seleccionado U17, alcanzando los cuartos de final.</p>
+        </div>
+      </div>
+      <div class="tl reveal" data-d="2">
+        <div class="yr">2024 — Hoy <small>Comunas de Punilla</small></div>
+        <div class="ev">
+          <h3>Escuelas deportivas municipales</h3>
+          <p>Escuela de verano de la Municipalidad de Bialet Massé y escuela deportiva de la comuna de Cabalango.</p>
+        </div>
+      </div>
+      <div class="tl reveal" data-d="3">
+        <div class="yr">2006 — 2019 <small>Córdoba Capital</small></div>
+        <div class="ev">
+          <h3>Profesor de básquet en clubes</h3>
+          <p>Clubes Yuma, Las Palmas y Argüello Juniors, formando jugadores en distintas categorías.</p>
+        </div>
+      </div>
+      <div class="tl reveal" data-d="3">
+        <div class="yr">1999 — 2005 <small>Los comienzos</small></div>
+        <div class="ev">
+          <h3>Monitor y profesor de básquet</h3>
+          <p>Club Benjamín Matienzo y Polideportivo Municipal de Villa Allende, dirigiendo niños de 5 a 16 años.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FORMACIÓN ============================== -->
+<section class="sec" id="formacion">
+  <div class="wrap">
+    <div class="form-head">
+      <div class="sec-head">
+        <span class="sec-num">05</span>
+        <p class="eyebrow reveal">Formación</p>
+      </div>
+      <h2 class="h2 reveal" data-d="1">Una base académica en constante actualización.</h2>
+    </div>
+
+    <div class="creds">
+      <div class="cred feat reveal" data-d="1">
+        <span class="badge">Título</span>
+        <h3 class="ct">Profesor de Educación Física</h3>
+        <div class="cm">I.P.E.F · Córdoba · 2005</div>
+      </div>
+      <div class="cred feat reveal" data-d="1">
+        <span class="badge">Certificación</span>
+        <h3 class="ct">Entrenador Nacional de Básquetbol · Nivel 2</h3>
+        <div class="cm">Confederación Argentina de Básquetbol (Instituto CAB)</div>
+      </div>
+      <div class="cred reveal" data-d="2">
+        <h3 class="ct">Diplomatura en Coaching Ontológico Deportivo</h3>
+        <div class="cm">C.I.C · En curso · 2026</div>
+      </div>
+      <div class="cred reveal" data-d="2">
+        <h3 class="ct">Psicología Social</h3>
+        <div class="cm">C.I.C · En curso · 2.º año</div>
+      </div>
+      <div class="cred reveal" data-d="3">
+        <h3 class="ct">Psicología aplicada al deporte</h3>
+        <div class="cm">Psycademi · 2025</div>
+      </div>
+      <div class="cred reveal" data-d="3">
+        <h3 class="ct">Abordaje psicológico de la práctica deportiva</h3>
+        <div class="cm">Neuroclass · 2025</div>
+      </div>
+      <div class="cred reveal" data-d="3">
+        <h3 class="ct">Psicología deportiva: habilidades y técnicas de intervención</h3>
+        <div class="cm">Neuroclass · 2025</div>
+      </div>
+      <div class="cred reveal" data-d="4">
+        <h3 class="ct">Coaching ontológico aplicado al deporte</h3>
+        <div class="cm">Agencia Córdoba Deporte · 2024</div>
+      </div>
+      <div class="cred reveal" data-d="4">
+        <h3 class="ct">Prevención de la violencia en ámbitos deportivos</h3>
+        <div class="cm">Agencia Córdoba Deporte · 2024</div>
+      </div>
+      <div class="cred reveal" data-d="4">
+        <h3 class="ct">Primeros auxilios</h3>
+        <div class="cm">Cruz Roja Argentina</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CONTACTO ============================== -->
+<section class="contact" id="contacto">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num" style="color:var(--on-dark-mute)">06</span>
+      <p class="eyebrow reveal">Contacto</p>
+    </div>
+    <h2 class="reveal" data-d="1">Espero tu apoyo<br>y <span class="it">confianza.</span></h2>
+    <p class="contact-lead reveal" data-d="2">¿Tenés un equipo, un objetivo o un proceso en mente? Escribime y empecemos a construirlo.</p>
+
+    <div class="channels">
+      <a class="ch reveal" data-d="1" href="https://www.instagram.com/sinergia.studio_?igsh=MWs2bXRnMnQwc2lyMg==" target="_blank" rel="noopener">
+        <div>
+          <div class="cl">Instagram</div>
+          <div class="cv">@sinergia.studio_</div>
+        </div>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="ch reveal" data-d="1" href="https://wa.me/5493512079969" target="_blank" rel="noopener">
+        <div>
+          <div class="cl">WhatsApp</div>
+          <div class="cv">+54 9 351 207-9969</div>
+        </div>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="ch reveal" data-d="2" href="mailto:francomatiasluna@gmail.com">
+        <div>
+          <div class="cl">Email</div>
+          <div class="cv">francomatiasluna@gmail.com</div>
+        </div>
+        <span class="arrow">↗</span>
+      </a>
+      <!-- LinkedIn: reemplazar href cuando el perfil esté creado y quitar la clase "soon" -->
+      <div class="ch soon reveal" data-d="2" data-linkedin-placeholder>
+        <div>
+          <div class="cl">LinkedIn</div>
+          <div class="cv">Próximamente</div>
+        </div>
+        <span class="pill">Pronto</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/sinergia-mark-white.png" alt="" />
+          <div class="ft">Sinergia Studio<span>Franco Matías Luna</span></div>
+        </div>
+        <div class="footer-soc">
+          <a class="ul" href="https://www.instagram.com/sinergia.studio_?igsh=MWs2bXRnMnQwc2lyMg==" target="_blank" rel="noopener">Instagram</a>
+          <a class="ul" href="mailto:francomatiasluna@gmail.com">Email</a>
+          <a class="ul" href="https://wa.me/5493512079969" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Sinergia Studio — Bialet Massé, Córdoba · Argentina</span>
+        <span>Coaching · Entrenamiento · Desarrollo deportivo</span>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ============================== SCRIPT ============================== -->
+<script>
+(function(){
+  "use strict";
+  var nav = document.getElementById('nav');
+  var hero = document.getElementById('inicio');
+  var burger = document.getElementById('burger');
+  var navlinks = document.getElementById('navlinks');
+  var brandmark = document.getElementById('brandmark');
+
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav: scrolled state + hide on scroll-down + on-hero color toggle
+  var lastY = window.scrollY, ticking = false;
+  function onScroll(){
+    var y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 40);
+
+    var heroBottom = hero.offsetHeight - 90;
+    var onHero = y < heroBottom;
+    nav.classList.toggle('on-hero', onHero);
+    // swap brand mark to dark version when nav background turns light
+    brandmark.src = (y > 40 && !onHero) ? 'assets/sinergia-mark-black.png' : 'assets/sinergia-mark-white.png';
+
+    if (!document.body.classList.contains('menu-open')){
+      if (y > lastY && y > 300) nav.classList.add('hide');
+      else nav.classList.remove('hide');
+    }
+    lastY = y;
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
+  }, {passive:true});
+  onScroll();
+
+  // Mobile menu
+  function closeMenu(){
+    document.body.classList.remove('menu-open');
+    burger.setAttribute('aria-expanded','false');
+    burger.setAttribute('aria-label','Abrir menú');
+  }
+  burger.addEventListener('click', function(){
+    var open = document.body.classList.toggle('menu-open');
+    burger.setAttribute('aria-expanded', open ? 'true':'false');
+    burger.setAttribute('aria-label', open ? 'Cerrar menú':'Abrir menú');
+    if (open){ var first = navlinks.querySelector('a'); if (first) first.focus(); }
+  });
+  navlinks.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape' && document.body.classList.contains('menu-open')){ closeMenu(); burger.focus(); }
+  });
+
+  // Scroll reveal
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
